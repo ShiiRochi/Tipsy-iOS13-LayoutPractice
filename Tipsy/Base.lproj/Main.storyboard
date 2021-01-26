@@ -37,6 +37,9 @@
                                         <color key="textColor" red="0.0" green="0.69019607839999997" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="onBillChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="vLb-4w-2KJ"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -61,9 +64,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-OE-xOM" userLabel="TipInput">
                                                 <rect key="frame" x="0.0" y="68" width="374" height="54"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIj-D2-Uq5">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIj-D2-Uq5">
                                                         <rect key="frame" x="0.0" y="0.0" width="83.5" height="54"/>
-                                                        <accessibility key="accessibilityConfiguration" identifier=" "/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="zero"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Zdi-sy-9Pe"/>
                                                             <constraint firstAttribute="height" constant="54" id="v39-Hn-Rkg"/>
@@ -125,16 +128,19 @@
                                                 <rect key="frame" x="0.0" y="228" width="374" height="32"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="qvo-Lq-PKh" userLabel="SplitInput">
-                                                        <rect key="frame" x="116" y="0.0" width="142" height="32"/>
+                                                        <rect key="frame" x="105.5" y="0.0" width="163" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-Bj-XTX">
-                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="32"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="42" id="KIu-vS-GBl"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                                 <color key="textColor" red="0.0" green="0.69019607839999997" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="2" maximumValue="25" translatesAutoresizingMaskIntoConstraints="NO" id="cVl-CQ-TWg">
-                                                                <rect key="frame" x="48" y="0.0" width="94" height="32"/>
+                                                                <rect key="frame" x="69" y="0.0" width="94" height="32"/>
                                                                 <color key="tintColor" red="0.0" green="0.59227246050000004" blue="0.347086966" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <connections>
                                                                     <action selector="onSplitCountChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="Cm7-yO-EWS"/>
@@ -143,7 +149,7 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="SQn-IJ-EJ7"/>
-                                                            <constraint firstAttribute="width" constant="142" id="o3z-2U-3RO"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="142" id="o3z-2U-3RO"/>
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
@@ -209,9 +215,11 @@
                     <connections>
                         <outlet property="billInputView" destination="hoc-4I-eJO" id="vq3-Pv-Uae"/>
                         <outlet property="splitCounterView" destination="b3A-Bj-XTX" id="Wlq-ck-xfU"/>
+                        <outlet property="stepperView" destination="cVl-CQ-TWg" id="zKI-hH-ixU"/>
                         <outlet property="tenPercentTipBtn" destination="Rwu-A9-VfH" id="Yr0-Oa-gPX"/>
                         <outlet property="twentyPercentTipBtn" destination="CKa-YD-tVk" id="HO3-h6-yqg"/>
                         <outlet property="zeroPercentTipBtn" destination="NIj-D2-Uq5" id="bbH-dL-6au"/>
+                        <segue destination="Dnf-m2-FPm" kind="presentation" identifier="goToResults" id="iv2-pd-4wx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -223,7 +231,7 @@
             <objects>
                 <viewController id="Dnf-m2-FPm" customClass="ResultsViewController" customModule="Tipsy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E4v-0r-cyo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aU-5P-VMi" userLabel="TotalContainer">
@@ -262,7 +270,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzV-gt-7rc" userLabel="RECALC_BTN">
-                                <rect key="frame" x="107" y="808" width="200" height="54"/>
+                                <rect key="frame" x="107" y="754" width="200" height="54"/>
                                 <color key="backgroundColor" red="0.0" green="0.69019607839999997" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="OSY-lN-j7U"/>

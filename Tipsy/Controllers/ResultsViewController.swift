@@ -9,15 +9,24 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
-
+    
     @IBOutlet weak var totalPerPersonView: UILabel!
     
     @IBOutlet weak var hintLabelView: UILabel!
     
+    var bilPerPerson: Double = 0.0;
+    
+    var peopleCount: Double = 0;
+    
+    var tip: Double = 0.0;
+    
+    var tmpl = "Split between $PEOPLE$ people, with $TIP$ tip.";
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        totalPerPersonView.text = String(format: "%.2f", bilPerPerson)
+        hintLabelView.text = tmpl.replacingOccurrences(of: "$PEOPLE$", with: String(format: "%.0f", peopleCount)).replacingOccurrences(of: "$TIP$", with: "\(String(format: "%.0f", tip * 100))%")
     }
     
 
@@ -32,6 +41,7 @@ class ResultsViewController: UIViewController {
     */
 
     @IBAction func onRecalculateClick(_ sender: Any) {
+        dismiss(animated: true);
     }
     
 }
